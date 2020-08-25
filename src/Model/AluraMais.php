@@ -2,7 +2,7 @@
 
 namespace Alura\Solid\Model;
 
-class AluraMais extends Video implements Pontuavel
+class AluraMais extends Video implements Pontuavel, Assistivel
 {
     private $categoria;
 
@@ -14,7 +14,8 @@ class AluraMais extends Video implements Pontuavel
 
     public function recuperarUrl(): string
     {
-        return str_replace(' ', '-', strtolower($this->categoria));
+        $objSlug = new Slug($this->categoria);
+        return 'http://videos.alura.com.br/' . $objSlug->__toString() . '/' . str_replace(' ', '-', strtolower($this->nome));
     }
 
     public function recuperarPontuacao(): int
